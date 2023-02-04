@@ -2,6 +2,13 @@ import { Grid, Paper } from "@mui/material";
 import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Accordion from "./Accordion";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { dark } from "@mui/material/styles/createPalette";
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export default function App() {
   const [logState, setLogState] = React.useState(false);
@@ -27,15 +34,16 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <Header title="Events" logState={!logState} />
+      <br />
       <Paper
         sx={{
-          height: "89vh",
+          height: "85vh",
         }}
       >
         <Accordion events={events} />
       </Paper>
-    </>
+    </ThemeProvider>
   );
 }

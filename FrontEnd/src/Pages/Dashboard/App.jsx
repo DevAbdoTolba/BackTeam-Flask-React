@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import Dashboard from "./Dashboard";
 import Login from "./../LogIn/App";
 import Header from "../../components/Header";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export default function App() {
   const [admin, setAdmin] = useState(false);
@@ -19,8 +25,10 @@ export default function App() {
     }
   }, [logState]);
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <Header title="Dashboard" logState={!logState} admin={admin} />
+      <br />
+
       {!logState ? (
         <Login
           logState={logState}
@@ -32,6 +40,6 @@ export default function App() {
       ) : (
         <Dashboard regnum={regnum} />
       )}
-    </>
+    </ThemeProvider>
   );
 }

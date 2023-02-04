@@ -4,6 +4,13 @@ import Form from "./Form";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Box } from "@mui/system";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
+
 export default function App({
   logState,
   setLogState,
@@ -38,7 +45,7 @@ export default function App({
   }, []);
 
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       {session ? (
         <>
           {/* center the CircularProgress */}
@@ -68,6 +75,6 @@ export default function App({
           <h1 className={nope[1]}>NOPE</h1>
         </>
       )}
-    </>
+    </ThemeProvider>
   );
 }

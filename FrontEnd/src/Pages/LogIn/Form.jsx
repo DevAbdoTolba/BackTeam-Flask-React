@@ -29,6 +29,8 @@ export default function App({
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = useState(false);
+  const [backError, setBackError] = useState("");
+  const [spam_counter, setSpamCounter] = useState(2);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => {
@@ -60,6 +62,7 @@ export default function App({
         minHeight: "90vh",
       }}
       onSubmit={handleSubmit((data) => {
+        setTimeout(() => setLoading(!loading), 2000);
         setRegNum(data.regnum);
         setTimeout(() => {
           fetch(
@@ -92,8 +95,10 @@ export default function App({
                 }, 1000);
               } else if (txtRes === "False") {
                 console.error("WrongRegNum");
+                setBackError("WrongRegNum");
               } else {
                 console.error("WrongPassword");
+                setBackError("WrongPassword");
               }
             })
             .catch((err) => {
@@ -103,7 +108,21 @@ export default function App({
       })}
     >
       <Paper className={nope} elevation={3} sx={{ p: "2rem" }}>
-        <Typography variant="h4" component="h2">
+        <Typography
+          id="secret_slide"
+          variant="h4"
+          component="h2"
+          onClick={() => {
+            if (spam_counter % 11 === 0) {
+              setTimeout(() => {
+                document.getElementById("secret_slide").style.animation =
+                  "slide 5s";
+              }, 5000);
+              document.getElementById("secret_slide").style.animation = "none";
+            }
+            setSpamCounter(spam_counter + 1);
+          }}
+        >
           Slide in
         </Typography>
         <TextField
@@ -124,8 +143,12 @@ export default function App({
           min="0"
           max="9999999999"
           fullWidth
-          helperText={errors.regnum ? errors.regnum?.message : " "}
-          error={errors.regnum ? true : false}
+          helperText={
+            errors.password?.message || backError === "WrongRegNum"
+              ? "Wrong RegNum"
+              : ""
+          }
+          error={errors.regnum ? true : false || backError == "WrongRegNum"}
         />
 
         <br />
@@ -138,7 +161,13 @@ export default function App({
             {...register("password", { required: "This field is required" })}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
-            error={errors.password ? true : false}
+            error={
+              errors.password
+                ? true
+                : false || backError == "WrongPassword"
+                ? true
+                : false
+            }
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -154,7 +183,10 @@ export default function App({
             label="Password"
           />
           <Typography variant="caption" sx={{ color: "red" }}>
-            &nbsp;{errors.password?.message}
+            &nbsp;
+            {errors.password?.message || backError === "WrongPassword"
+              ? "WrongPassword"
+              : ""}
           </Typography>
         </FormControl>
         {/* button centerd to slide */}
@@ -165,12 +197,7 @@ export default function App({
             justifyContent: "center",
           }}
         >
-          <LoadingButton
-            type="submit"
-            loading={loading}
-            onClick={() => setTimeout(() => setLoading(!loading), 1000)}
-            variant="contained"
-          >
+          <LoadingButton type="submit" loading={loading} variant="contained">
             Log In
           </LoadingButton>
         </Box>

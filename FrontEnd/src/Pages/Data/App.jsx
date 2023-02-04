@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import Data from "./Data";
 import Login from "./../LogIn/App";
 import Header from "../../components/Header";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 export default function App() {
   const [nope, setNope] = useState(["", ""]);
@@ -35,8 +41,10 @@ export default function App() {
   }, [logState]);
 
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
       <Header title="Data" logState={!logState} admin={admin} />
+      <br />
+
       {!(logState && !admin && regnum == "211013214") ? (
         <Login
           className="login"
@@ -49,6 +57,6 @@ export default function App() {
       ) : (
         <Data />
       )}
-    </>
+    </ThemeProvider>
   );
 }

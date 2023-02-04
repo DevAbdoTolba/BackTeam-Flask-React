@@ -2,11 +2,17 @@
 
     seonced login in data dosen't do the "Nope" effect
 
+    If admin, and clicked on home... it resets admin state to false! but data is still accesiple
+
+    Loading with none stop when there is error entering values in form
+
 # TODO
 
 -[ ] Number of likes increases in the database when clicked
 
 -[ ] Notfication when a new event is out, and email message
+
+-[ ] If password or regnum is wrong, send an error messege for the form
 
 # CAN'T DO
 
@@ -40,3 +46,11 @@
 
 - #### RegNum and Password check process are sepreted
   - The server first checks for the existance of the user, then it checks if the password is correct or not, which makes SQL payload injection almost impossible
+
+# Easter Eggs
+
+- #### Type "backteam" in the main page /
+
+- #### click 9 times on any heart at /events, and then click 11 times and then 11 times
+
+- #### click 9 times on "slide in" at login form in /dashboard, wait 5s and do it again

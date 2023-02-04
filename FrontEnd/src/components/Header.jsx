@@ -9,10 +9,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import Link from "@mui/material/Link";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Avatar } from "@mui/material";
-import LoginIcon from "@mui/icons-material/Login";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import DownhillSkiingIcon from "@mui/icons-material/DownhillSkiing";
 
 export default function ButtonAppBar({ title, admin, logState, src }) {
