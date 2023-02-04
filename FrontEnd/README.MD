@@ -4,7 +4,6 @@
 
     If admin, and clicked on home... it resets admin state to false! but data is still accesiple
 
-    Loading with none stop when there is error entering values in form
 
 # TODO
 
@@ -19,6 +18,7 @@
 -[ ] Cookies ID session
 
 # DONE
+-[X] Loading with none stop when there is error entering values in form
 
 -[X] Like button makes the accordion opens
 
